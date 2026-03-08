@@ -6,17 +6,17 @@
 file(GLOB_RECURSE LIBTILED_SOURCES "src/*.c")
 
 # Create static library
-add_library(libtiled STATIC ${LIBTILED_SOURCES})
+add_library(tiled STATIC ${LIBTILED_SOURCES})
 
 # Add include directory
-target_include_directories(libtiled
+target_include_directories(tiled
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
 
 # Set library properties
-set_target_properties(libtiled PROPERTIES
+set_target_properties(tiled PROPERTIES
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
     C_STANDARD 23

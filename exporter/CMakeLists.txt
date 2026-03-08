@@ -11,7 +11,7 @@ add_executable(libtiled-exporter ${EXPORTER_SOURCES})
 # Link dependencies
 target_link_libraries(libtiled-exporter
     PRIVATE
-        libtiled
+        tiled
         json-c
         path_utils
 )
