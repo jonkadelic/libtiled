@@ -8,6 +8,15 @@ file(GLOB_RECURSE EXPORTER_SOURCES "src/*.c")
 # Create executable
 add_executable(libtiled-exporter ${EXPORTER_SOURCES})
 
+# FetchContent for json-c dependency
+include(FetchContent)
+FetchContent_Declare(
+    json-c
+    GIT_REPOSITORY https://github.com/json-c/json-c.git
+    GIT_TAG json-c-0.17-20230812
+)
+FetchContent_MakeAvailable(json-c)
+
 # Link dependencies
 target_link_libraries(libtiled-exporter
     PRIVATE
