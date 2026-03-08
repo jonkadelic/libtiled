@@ -16,6 +16,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(json-c)
 
+# Option to build exporter (disabled by default when used via FetchContent)
+option(LIBTILED_BUILD_EXPORTER "Build the libtiled exporter tool" ${PROJECT_IS_TOP_LEVEL})
+
 # Add subdirectories
 add_subdirectory(lib)
-add_subdirectory(exporter)
+if(LIBTILED_BUILD_EXPORTER)
+    add_subdirectory(exporter)
+endif()

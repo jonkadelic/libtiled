@@ -32,6 +32,27 @@ This will build:
 - `lib/libtiled.a` - Static library
 - `exporter/libtiled-exporter` - Exporter tool
 
+### CMake Options
+
+- `LIBTILED_BUILD_EXPORTER` (default: ON when building standalone, OFF when included via FetchContent) - Build the exporter tool
+
+### Using with FetchContent
+
+To include libtiled in your project:
+
+```cmake
+include(FetchContent)
+FetchContent_Declare(
+    libtiled
+    GIT_REPOSITORY https://github.com/jonkadelic/libtiled.git
+    GIT_TAG main
+)
+FetchContent_MakeAvailable(libtiled)
+target_link_libraries(your_target PRIVATE libtiled)
+```
+
+By default, the exporter tool will not be built when using FetchContent. To build it anyway, set `LIBTILED_BUILD_EXPORTER` to ON before calling `FetchContent_MakeAvailable`.
+
 ## Usage
 
 ### Exporting Tilemaps
