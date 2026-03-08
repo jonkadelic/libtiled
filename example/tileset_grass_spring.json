@@ -1,0 +1,15 @@
+{
+    "columns": 24,
+    "image": "tileset_grass_spring.png",
+    "imageheight": 640,
+    "imagewidth": 384,
+    "margin": 0,
+    "name": "tileset_grass_spring",
+    "spacing": 0,
+    "tilecount": 960,
+    "tiledversion": "1.11.2",
+    "tileheight": 16,
+    "tilewidth": 16,
+    "type": "tileset",
+    "version": "1.10"
+}
