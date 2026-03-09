@@ -48,7 +48,7 @@ tiled_tilemap_t* tiled_load_tilemap(size_t buffer_len, uint8_t const* buffer) {
     if (packet_tilesets->num_tilesets == 0) {
         return nullptr;
     }
-    if (packet_header->length < packet_header->offsets.tilesets + sizeof(packet_tilesets_t) + (sizeof(packet_tilesets_t) * packet_tilesets->num_tilesets)) {
+    if (packet_header->length < packet_header->offsets.tilesets + sizeof(packet_tilesets_t) + (sizeof(packet_tileset_t) * packet_tilesets->num_tilesets)) {
         return nullptr;
     }
 
