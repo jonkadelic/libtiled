@@ -56,7 +56,7 @@ tiled_tilemap_t* tiled_load_tilemap(size_t buffer_len, uint8_t const* buffer) {
     size_t const out_offset_main_area = 0;
     size_t const out_offset_layers_area = out_offset_main_area + sizeof(tiled_tilemap_t);
     size_t const out_offset_tile_data_area = out_offset_layers_area + (sizeof(tiled_tilemap_layer_t) * packet_tilemap->num_layers);
-    size_t const out_offset_tilesets_area = out_offset_tile_data_area + (sizeof(uint16_t) * packet_tilemap->tiles_x * packet_tilemap->tiles_y);
+    size_t const out_offset_tilesets_area = out_offset_tile_data_area + (sizeof(uint16_t) * packet_tilemap->tiles_x * packet_tilemap->tiles_y * packet_tilemap->num_layers);
     size_t const out_offset_end = out_offset_tilesets_area + (sizeof(tiled_tileset_t) * packet_tilesets->num_tilesets);
     
     // Allocate external tilemap struct
@@ -68,7 +68,7 @@ tiled_tilemap_t* tiled_load_tilemap(size_t buffer_len, uint8_t const* buffer) {
     // Initialize pointers
     out_tilemap->layers = (tiled_tilemap_layer_t*) (((uint8_t*) out_tilemap) + out_offset_layers_area);
     for (size_t i = 0; i < packet_tilemap->num_layers; i++) {
-        out_tilemap->layers[i].tiles = (uint16_t*) (((uint8_t*) out_tilemap) + out_offset_tile_data_area + (sizeof(uint16_t) * packet_tilemap->tiles_x * packet_tilemap->tiles_y));
+        out_tilemap->layers[i].tiles = (uint16_t*) (((uint8_t*) out_tilemap) + out_offset_tile_data_area + (sizeof(uint16_t) * packet_tilemap->tiles_x * packet_tilemap->tiles_y * i));
     }
     out_tilemap->tilesets = (tiled_tileset_t*) (((uint8_t*) out_tilemap) + out_offset_tilesets_area);
 
@@ -82,9 +82,9 @@ tiled_tilemap_t* tiled_load_tilemap(size_t buffer_len, uint8_t const* buffer) {
     // Initialize layers
     for (size_t i = 0; i < out_tilemap->num_layers; i++) {
         tiled_tilemap_layer_t* const out_layer = &out_tilemap->layers[i];
-        uint16_t const* const packet_tiles = packet_tiles + (packet_tilemap->tiles_x * packet_tilemap->tiles_y);
+        uint16_t const* const packet_layer_tiles = packet_tiles + (packet_tilemap->tiles_x * packet_tilemap->tiles_y * i);
 
-        memcpy(out_layer->tiles, packet_tiles, sizeof(uint16_t) * out_tilemap->tiles_x * out_tilemap->tiles_y);
+        memcpy(out_layer->tiles, packet_layer_tiles, sizeof(uint16_t) * out_tilemap->tiles_x * out_tilemap->tiles_y);
     }
 
     // Initialize tilesets

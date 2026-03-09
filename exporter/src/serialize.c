@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define TEST 0
+#if TEST
+#include <tiled.h>
+#endif
+
 #include "../../lib/src/internal.h"
 
 bool serialize(json_tilemap_t const* tilemap, size_t num_tilesets, json_tileset_t const tilesets[static num_tilesets], FILE* out) {
@@ -54,7 +59,12 @@ bool serialize(json_tilemap_t const* tilemap, size_t num_tilesets, json_tileset_
         packet_tilesets->tilesets[i].first_gid = (uint16_t) tilemap->tilesets[i].firstgid;
     }
 
-    if (fwrite(buffer, packet_offset_end, 1, out) != 1) {
+#if TEST
+    tiled_tilemap_t* tt = tiled_load_tilemap(packet_offset_end, buffer);
+    free(tt);
+#endif
+
+    if (fwrite(buffer, 1, packet_offset_end, out) != packet_offset_end) {
         free(buffer);
         return false;
     }

@@ -17,6 +17,8 @@ int main(int argc, char const* argv[argc]) {
     }
     char const* const tilemap_path = argv[1];
 
+    // char const* const tilemap_path = "../../example/tilemap.json";
+
     char tilemap_abs_path[256];
     char tilemap_dir_path[256];
     char tilemap_basename[256];
@@ -123,6 +125,12 @@ int main(int argc, char const* argv[argc]) {
 
     printf("Successfully serialized tilemap to \"%s\".\n", out_path);
     fclose(out_file);
+
+    for (size_t i = 0; i < json_tilemap.num_layers; i++) {
+        free(json_tilemap.layers[i].data);
+    }
+    free(json_tilemap.layers);
+    free(json_tilemap.tilesets);
 
     return 0;
 }
