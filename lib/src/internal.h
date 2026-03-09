@@ -36,6 +36,6 @@ typedef struct [[gnu::packed]] packet_tileset {
 } packet_tileset_t;
 
 typedef struct [[gnu::packed]] packet_tilesets {
-    size_t num_tilesets;
+    uint8_t num_tilesets;
     packet_tileset_t tilesets[];
 } packet_tilesets_t;
