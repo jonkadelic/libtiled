@@ -3,16 +3,16 @@
 #include <stddef.h>
 #include <stdint.h>
 
-typedef struct [[gnu::packed]] tiled_tileset {
+typedef struct [[gnu::aligned(4)]] tiled_tileset {
     char name[16];
     uint16_t first_gid;
 } tiled_tileset_t;
 
-typedef struct [[gnu::packed]] tiled_tilemap_layer {
+typedef struct [[gnu::aligned(4)]] tiled_tilemap_layer {
     uint16_t* tiles;
 } tiled_tilemap_layer_t;
 
-typedef struct [[gnu::packed]] tiled_tilemap {
+typedef struct [[gnu::aligned(4)]] tiled_tilemap {
     uint8_t tiles_x, tiles_y;
     uint8_t tile_size;
     uint8_t num_layers;

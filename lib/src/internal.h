@@ -13,7 +13,7 @@
  * 3. packet_tilesets_t (at header.offsets.tilesets)
  */
 
-typedef struct [[gnu::packed]] packet_header {
+typedef struct [[gnu::aligned(4)]] packet_header {
     uint16_t magic;
     uint16_t version;
     uint32_t length;
@@ -24,18 +24,18 @@ typedef struct [[gnu::packed]] packet_header {
     } offsets;
 } packet_header_t;
 
-typedef struct [[gnu::packed]] packet_tilemap {
+typedef struct [[gnu::aligned(4)]] packet_tilemap {
     uint8_t tiles_x, tiles_y;
     uint8_t tile_size;
     uint8_t num_layers;
 } packet_tilemap_t;
 
-typedef struct [[gnu::packed]] packet_tileset {
+typedef struct [[gnu::aligned(4)]] packet_tileset {
     char name[16];
     uint16_t first_gid;
 } packet_tileset_t;
 
-typedef struct [[gnu::packed]] packet_tilesets {
+typedef struct [[gnu::aligned(4)]] packet_tilesets {
     uint8_t num_tilesets;
     packet_tileset_t tilesets[];
 } packet_tilesets_t;
