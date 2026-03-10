@@ -22,3 +22,5 @@ typedef struct [[gnu::aligned(4)]] tiled_tilemap {
 } tiled_tilemap_t;
 
 tiled_tilemap_t* tiled_load_tilemap(size_t buffer_len, uint8_t const* buffer);
+
+void tiled_free_tilemap(tiled_tilemap_t* tilemap);

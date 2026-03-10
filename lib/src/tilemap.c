@@ -98,3 +98,11 @@ tiled_tilemap_t* tiled_load_tilemap(size_t buffer_len, uint8_t const* buffer) {
 
     return out_tilemap;
 }
+
+void tiled_free_tilemap(tiled_tilemap_t* tilemap) {
+    if (tilemap == NULL) {
+        return;
+    }
+
+    free(tilemap);
+}
