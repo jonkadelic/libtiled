@@ -30,3 +30,5 @@ set_target_properties(libtiled-exporter PROPERTIES
     C_STANDARD 23
     C_STANDARD_REQUIRED ON
 )
+
+install(TARGETS libtiled-exporter)
